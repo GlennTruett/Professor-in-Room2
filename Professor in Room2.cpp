@@ -11,25 +11,27 @@
 
 using namespace std;
 
-
+int proRoom();
 int sound();//this predefines the function named sound that is written after the function main
 
 int main() //the function named main
 {
-	char again; //creats the variable again which is used to hold the value of the user's input when answering the question if they want to continue
+	char again1; //creats the variable again which is used to hold the value of the user's input when answering the question if they want to continue
+	char again2;
 
 	//do tells the program to do everything following it up untill a while statement
 	do {
 		srand(static_cast<unsigned int>(time(NULL))); //seed random number generator
 		int randomNumber = rand(); //generate random number
-		int pnum = (randomNumber % 10) + 1; //gets a number between 1 and 10 and assigns it to the variable pnum for professor number
-		int roomNum = (randomNumber % 20) + 1; // gets a number between 1 and 20 and assigns it to the variable room for the room number
-		int choice;//creats a numeric variable to represent the number chosen by the user
+		int pnum = (randomNumber % 9) + 1; //gets a number between 0 and 9 and assigns it to the variable pnum for professor number
+		int roomNum = (randomNumber % 19) + 1; // gets a number between 0 and 9 and assigns it to the variable room for the room number
+		int pchoice;//creats a numeric variable to represent the number of the professor chosen by the user
+		int rchoice; // creats a numeric variable to represent the number of the room chosen by the user
 		string fName;//creats a string variable to represent the user's name
 
 
 		cout << "Your professor number is: " << pnum << endl;
-		cout << "Your room number is: " << roomNum << endl;
+		cout << "Your room name is: " << roomNum << endl;
 		Sleep(2000);
 		cout << "What is your first name? \n"; // prints out the question What is your name?
 		cin >> fName; // receives the input from the user and assigns it to the variable names fName.
@@ -47,7 +49,7 @@ int main() //the function named main
 		for (int i = 0; i < 10; i++) {
 			cout << i + 1 << " " << Professor[i] << ", \n"; //displays each value of i+1 so that the numbers start a 1 instead of 0. and displays the professors name with the corresponding name
 		}
-		cout << "\n\n";
+		cout << "\n\n"; // displays two lines between the Professor and the room list.  
 
 		for (int j = 0; j < 20; j++) {
 			cout << j + 1 << " " << room[j] << ", \n"; //displays each value of j+1 so that the numbers start at 1 instead of 0. and displays the room name.
@@ -55,24 +57,26 @@ int main() //the function named main
 
 		system("pause\n");// gives the command to press any key to continue and pauses the program until the user pushes a key
 		//Displays what is given in quotations and calls for an input
-		cout << "\nIf you will notice there are numbers in front of each professor's name. Please enter a number\n from 1 through 10 to guess who you will be meeting.\n";
-		cin >> choice;//recievs the input from the user when answering the question above
+		cout << "\nIf you will notice there are numbers in front of each professor's name and room name. Please type a number\n from 1 through 10 to guess who you will be meeting.\n";
+		cout << "Then type another number from 1 through 20 to represent the room you will meet in." << endl;
+		cin >> pchoice >> rchoice;//recievs the input from the user when answering the question above
 
 		//Creats a conditional statement that compares the choice -1 and the randomly generated number 
-		if (choice-- == pnum) {
-			cout << "You guessed correctly\n" << "\nThe professor you will be meeting is " << Professor[pnum] << endl; // creats a response to the users input if it matches with the random number
-			sound(); // calls the function names sound into action
-
-
+		if (pchoice-- == pnum && rchoice-- == roomNum) {
+			cout << "You guessed correctly\n" << "\nThe professor you will be meeting is" << " " << Professor[pnum] << "." << " " << "The room is the" << " " << room[roomNum] << endl; // creats a response to the users input if it matches with the random number
+			
+			
+			//sound(); // calls the function names sound into action
 		}
+
 		// this creats a responce to the user's input if it does not match the random number genereated
 		else {
 			cout << "\nSorry you guessed incorrectly\n"; // Politely tells the user that they guessed wrong
 			cout << "\nWould you like to try again?\n Please enter y or n \n"; // asks for input that determins if the user wants to continue
-			cin >> again; // assigns the variable again the value of the user's input
+			cin >> again1; // assigns the variable again the value of the user's input
 
 			//Creats a condition in which if the variable "again" has the value of 'n' then it displays the message bellow
-			if (again == 'n') {
+			if (again1 == 'n') {
 				cout << "\nHave a Nice Day! " << fName << endl;
 
 			}
@@ -81,7 +85,7 @@ int main() //the function named main
 
 
 
-	} while (again == 'y');//This while statement closes the do while loop
+	} while (again1 == 'y');//This while statement closes the do while loop
 
 	return 0; //end the main function
 }
@@ -89,7 +93,7 @@ int main() //the function named main
 //creats the function called "sound"
 int sound() {
 	Sleep(1000); // waits one second before continuing 
-	cout << "\nYour professor is late and you hear a sound.\n" << endl; // prints the message that tells that the professor is late and that you are about to hear a sound
+	cout << "\nYour professor is late and you hear another tone.\n" << endl; // prints the message that tells that the professor is late and that you are about to hear a sound
 	Sleep(1000);
 	Beep(500, 1000);//creats the ton that the user hears
 	Sleep(2000);
